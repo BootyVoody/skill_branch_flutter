@@ -18,4 +18,10 @@ class UserHolder {
       throw Exception('A user with this name already exsist');
     }
   }
+
+  void registerUserByEmail(String name, String email) {
+    User user = User(name: name, email: email);
+
+    print(user.toString());
+  }
 }
