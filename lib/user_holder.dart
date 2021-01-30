@@ -1,0 +1,21 @@
+// user_holde - хранение пользователей
+
+import 'package:FlutterGalleryApp/models/user.dart';
+
+import 'string_utils.dart';
+
+class UserHolder {
+  Map<String, User> users = {};
+
+  void registerUser(String name, String phone, String email) {
+    User user = User(name: name, phone: phone, email: email);
+
+    print(user.toString());
+
+    if (!users.containsKey(user.login)) {
+      users.addAll({user.login: user});
+    } else {
+      throw Exception('A user with this name already exsist');
+    }
+  }
+}
