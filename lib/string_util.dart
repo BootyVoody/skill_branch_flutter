@@ -1,3 +1,6 @@
-extension MyString on String {
-  String capitalize(String s) => s[0].toUpperCase() + s.substring(1).toLowerCase();
+extension CalitalizedString on String {
+  String get capitalized =>
+      this[0].toUpperCase() + this.substring(1).toLowerCase();
+
+  String capitalize(String s) => s.capitalized; // WTF
 }
