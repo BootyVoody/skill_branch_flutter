@@ -9,12 +9,12 @@ class UserHolder {
     if (!users.containsKey(user.login)) {
       users[user.login] = user;
     } else {
-      throw Exception('A user with this email already exists');
+      throw Exception('A user with this name already exists');
     }
   }
 
-  User registerUserByEmail(String name, String email) {
-    final user = User(name: name, email: email);
+  User registerUserByEmail(String fullName, String email) {
+    final user = User(name: fullName, email: email);
 
     if (!users.containsKey(user.login)) {
       users[user.login] = user;
@@ -26,14 +26,14 @@ class UserHolder {
 
   getUserByLogin(String login) => users[login];
 
-  User registerUserByPhone(String name, String phone) {
-    final user = User(name: name, phone: phone);
+  User registerUserByPhone(String fullName, String phone) {
+    final user = User(name: fullName, phone: phone);
 
     if (!users.containsKey(user.login)) {
       users[user.login] = user;
       return user;
     } else {
-      throw Exception('A user with this email already exists');
+      throw Exception('A user with this phone already exists');
     }
   }
 
@@ -41,8 +41,8 @@ class UserHolder {
     users[login].friends.addAll(friends);
   }
 
-  User findUserInFriends(String login, User friend) =>
-      users[login].friends.contains(friend) ? friend : throw Exception('');
+  User findUserInFriends(String fullName, User user) =>
+      users[fullName].friends.contains(user) ? user : throw Exception('${user.login} is not a friend of the login');
 
   List<User> importUsers(List<String> list) => list
       .map((lines) => lines

@@ -7,13 +7,13 @@ class User with UserUtils {
   factory User({String name, String phone, String email}) {
     if (name?.isEmpty == true) throw Exception('User name is empty');
     if (phone?.isEmpty == true && email?.isEmpty == true) {
-      throw Exception('Phone or email is empty');
+      throw Exception('phone or email is empty');
     }
     return User._(
         firstName: name.split(' ').first,
         lastName: name.split(' ').last,
-        phone: phone != null ? checkPhone(phone) : '',
-        email: email != null ? checkEmail(email) : '');
+        phone: phone != null ? checkPhone(phone) : 'Enter don\'t empty phone number',
+        email: email != null ? checkEmail(email) : 'Enter don\'t empty email');
   }
 
   User._({String firstName, String lastName, String phone, String email})
@@ -28,7 +28,7 @@ class User with UserUtils {
   static String checkPhone(String phone) {
     final plusAndDigits = phone.replaceAll(RegExp(r'[^+\d]'), '');
     if (!RegExp(r'^(?:[+0])?\d{11}').hasMatch(plusAndDigits)) {
-      throw Exception('Invalid phone number');
+      throw Exception('Enter a valid phone number starting with a + and containing 11 digits');
     }
     return plusAndDigits;
   }
@@ -37,7 +37,7 @@ class User with UserUtils {
       RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
               .hasMatch(email)
           ? email
-          : throw Exception('Invalid email');
+          : throw Exception('Enter a valid email');
 
   final String email;
   final String phone;
